@@ -1,5 +1,5 @@
 {
-    "version": "0.0.1",
+    "version": "0.0.3",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -64,9 +64,10 @@
         "typescript": "^3.9.10"
     },
     "keywords": [
-        "Table",
+        "table",
         "pagination",
         "sorting",
-        "filter"
+        "spring boot",
+        "react"
     ]
 }

@@ -1,11 +1,15 @@
 
-# Paginating and Sorting
+# Dynamic table with paging and sorting
 
+## for interface paginatingAndSorting of Spring Boot or other aplication with same params.  **see dataTable example**
+<br/>
 
 ## Parameters
+
 - dataTable = ```{dataTableProperties}```
 - onChange =  ```(resp: {order: string, page: number,sort: string}) => void```
     
+<br/><br/>
 
 # dataTable properties
 
@@ -20,7 +24,11 @@
 | totalPages         | `number`                    | Yes       | Total pages.                                                               |
 
 
+<br/><br/>
+
 ### dataTable example
+<hr/>
+
 ```json
 {
     "content":[
@@ -39,6 +47,7 @@
     ]
 }
 ```
+<br/><br/>
 
 # Titles properties (TitleTableProps)
 | Name  | Type                      | Required                           | Description                     |
@@ -47,8 +56,12 @@
 | name  | `string` or `Array`<`string`> | Yes, if you don't send  `sort` | Key to locate the value to show in the column. If it's a nested value, the keys are separated by a period. If you want to concatenate values in a column, the keys are sent in an array. |
 | title | `string`                    | Yes                                 | Title to show Columns in the table.     |
 
+<br/><br/>
 
 ### Titles example
+
+<hr/>
+
 ```json
 {"titles":[
     {
@@ -63,7 +76,7 @@
 ]}
 ```
 
-  
+<br/><br/>
 
 # How to use
 
