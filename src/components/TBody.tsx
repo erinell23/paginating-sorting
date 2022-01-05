@@ -1,5 +1,6 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import PropTypes from 'prop-types';
+import { TableContext } from "./Table"
 import { TitleTableProps } from "../interfaces/interfaces"
 import { useTbody } from '../hooks/useTbody';
 
@@ -11,9 +12,11 @@ interface props {
     titles?: Array<TitleTableProps>;
 }
 
-export const TBody = ({ children, content, titles, style, className }: props) => {
+export const TBody = ({ children, content, style, className }: props) => {
 
-    const { bodyShow } = useTbody({content, titles});
+    const { dataTable:{titles, content:contentCxt} } = useContext(TableContext);
+
+    const { bodyShow } = useTbody({content:content || contentCxt, titles});
 
     return (
         <tbody className={className} style={style}>
@@ -30,7 +33,7 @@ export const TBody = ({ children, content, titles, style, className }: props) =>
     )
 }
 TBody.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.elementType, PropTypes.arrayOf(PropTypes.elementType)]),
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     className: PropTypes.string,
     titles: PropTypes.arrayOf(PropTypes.shape({
         sort: PropTypes.string,

@@ -8,46 +8,50 @@ interface props {
     children?: ReactElement;
     className?: string;
     style?: React.CSSProperties;
-    titles: Array<TitleTableProps>;
+    titles?: Array<TitleTableProps>;
 }
 
 export const THead = ({ titles, children, className, style }: props) => {
-    const { handeChangePaginatingAndSorting, pageAction } = useContext(TableContext);
+    const { handeChangePaginatingAndSorting, pageAction, dataTable:{titles:titleCxt} } = useContext(TableContext);
+    
     const handleSortChange = (sort: string, order: string) => {
-
         handeChangePaginatingAndSorting({ ...pageAction, sort, order });
     }
-    return (
 
+    const titleShow = titles || titleCxt;
+
+    return (
         <thead className={className} style={style}>
             {children
                 ? children
-                : <tr>
-                    {titles.map((a, b) => {
-                        const order = (a.sort === pageAction.sort ? (pageAction.order === 'ASC' ? 'DESC' : 'ASC') : 'DESC');
-                        return <th
-                            onClick={() => a.sort && handleSortChange(a.sort, order)}
-                            key={b + '_' + a.title}
-                            className={a.sort && styles.sorting_hover}
-                        >{a.title} <span
-                            className={a.sort
-                                && `${styles.sorting_disabled} ${a.sort === pageAction.sort
-                                    ? (order === 'DESC' ? styles.sorting_asc : styles.sorting_desc) : ''
-                                }`}
-                        ></span></th>
-                    })}
-                </tr>
+                : titleShow
+                    ? <tr>
+                        {titleShow.map((a, b) => {
+                            const order = (a.sort === pageAction.sort ? (pageAction.order === 'ASC' ? 'DESC' : 'ASC') : 'DESC');
+                            return <th
+                                onClick={() => a.sort && handleSortChange(a.sort, order)}
+                                key={b + '_' + a.title}
+                                className={a.sort && styles.sorting_hover}
+                            >{a.title} <span
+                                className={a.sort
+                                    && `${styles.sorting_disabled} ${a.sort === pageAction.sort
+                                        ? (order === 'DESC' ? styles.sorting_asc : styles.sorting_desc) : ''
+                                    }`}
+                            ></span></th>
+                        })}
+                    </tr>
+                    : <></>
             }
         </thead>
     )
 }
 THead.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.elementType, PropTypes.arrayOf(PropTypes.elementType)]),
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     className: PropTypes.string,
     style: PropTypes.object,
     titles: PropTypes.arrayOf(PropTypes.shape({
         sort: PropTypes.string,
         name: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
         title: PropTypes.string.isRequired,
-    })).isRequired,
+    })),
 }

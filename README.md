@@ -1,86 +1,80 @@
-## paginating and sorting
+
+# Paginating and Sorting
 
 
+## Parameters
+- dataTable = ```{dataTableProperties}```
+- onChange =  ```(resp: {order: string, page: number,sort: string}) => void```
+    
 
-### example
+# dataTable properties
+
+| Name               | Type                        | Required  | Description                                                                |
+| ------------------ | --------------------------- | --------- | -------------------------------------------------------------------------- |
+| content            | `Array`<`{[key: string]: any}`> | Not    | JSONs array to populate the table.                                         |
+| maxItemsShow       | `number`                    | Not        | Maximum amount of items (pages) to show in the pagination. Default ```3```.|
+| number             | `number`                    | Yes        | Number of the current page                                                 |
+| showLastedAndFirst | `boolean`                   | Not        | Allows to show or not the buttons to go back "«" and forward "»" the next `X` amount of pages. Default ```true``` |
+| showPagination     | `boolean`                   | Not       | Allows to show or not show pagination. Default ```true```                  |
+| titles             | `Array`<`TitleTableProps`>  | Yes       | Titles for table columns.                                                  |
+| totalPages         | `number`                    | Yes       | Total pages.                                                               |
 
 
-
-```
-  const handleChangeTable = (pageAction:{order: string; page: number; sort: string;}) =>{
-    console.log(pageAction);
-  }
-```
-
-```
-  <Table dataTable={dataTable} onChange={handleChangeTable}/>
-```
-
-
-#### dataTable example
-```
-const data = {
-  content: [
-      {
-          id: 1,
-          name: "name1",
-          address: {
-              city: "ciudad",
-              State: "ss",
-              Country: "ddd"
-          }
-      },
-      {
-          id: 2,
-          name: "name2",
-          address: {
-              city: "city2",
-              State: "State2",
-              Country: "Country2"
-          }
-      },
-      {
-          id: 3,
-          name: "name3",
-          address: {
-              city: "city3",
-              State: "State3",
-              Country: "Country3"
-          }
-      },
-      {
-          id: 4,
-          name: "name4",
-          address: {
-              city: "city4",
-              State: "State4",
-              Country: "Country4"
-          }
-      },
-  ],
-  totalPages: 43,
-  totalElements: 422,
-  number: 0,
-  titles: [
-      {
-          title: "ID",
-          sort: "id"
-      },
-      {
-          title: "Name",
-          sort: "name",
-      },
-      {
-          title: "City",
-          sort: "city",
-          name:"address.city"
-      },
-      {
-          title: "Address",
-          sort: "address",
-          name:["address.State","address.Country"]
-      },
-
-  ]
+### dataTable example
+```json
+{
+    "content":[
+        {"id": 1,
+        "name": "name1",
+        "address": {
+            "city": "ciudad1",
+            "State": "State1",
+            "Country": "Country1"
+        }}...
+    ],
+    "number":0,
+    "totalPages":10,
+    "titles":[
+        ...
+    ]
 }
+```
+
+# Titles properties (TitleTableProps)
+| Name  | Type                      | Required                           | Description                     |
+| ----- | ------------------------- | ----------------------------------- | ------------------------------- |
+| sort  | `string`                  | Not                                  | Base text string to return when sorting a column, if not sent, the options in that column are hidden.   |
+| name  | `string` or `Array`<`string`> | Yes, if you don't send  `sort` | Key to locate the value to show in the column. If it's a nested value, the keys are separated by a period. If you want to concatenate values in a column, the keys are sent in an array. |
+| title | `string`                    | Yes                                 | Title to show Columns in the table.     |
+
+
+### Titles example
+```json
+{"titles":[
+    {
+        "title":"ID",
+        "sort":"id"
+    },
+    {
+        "title":"Address",
+        "sort":"city",
+        "name":["address.city","address.state"]
+    }
+]}
+```
+
+  
+
+# How to use
+
+```
+import { Table } from 'paginating-sorting'
+```
+```
+const handleChangeTable = (pageAction) =>{
+	console.log(pageAction);//order: string, page: number, sort: string
+}
+```
+```
+<Table dataTable={dataTable} onChange={handleChangeTable}/>
 ```

@@ -11,19 +11,23 @@ export const useTbody = ({ content, titles }: props) => {
 
     useEffect(() => {
         const destruc = (obj: { [key: string]: any }, sort: Array<string>, x: number) => {
-            let { [sort[x]]: val = '' } = obj;
+            let { [sort[x]]: val = '' } = obj || {};
             if (x < sort.length - 1) {
                 val = destruc(val, sort, x + 1);
             }
             return val;
         }
-        if (content && titles) {
-            setbodyShow(content?.map((obj) =>
+        if (titles) {
+            content && setbodyShow(content?.map((obj) =>
                 titles.map(({ sort, name }) =>
                     !Array.isArray(name)
                         ? destruc(obj, name?.split(".") || sort?.split(".") || [""], 0)
                         : name.map(x => destruc(obj, x.split("."), 0)).join(' ')
                 )
+            ));
+        }else{
+            content && setbodyShow(content?.map((obj) =>
+                Object.entries(obj).map(col=> col[1])
             ));
         }
     }, [content, titles]);

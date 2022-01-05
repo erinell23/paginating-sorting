@@ -8,13 +8,13 @@ export interface TableProps {
     classTable?: string;
     onChange: (pageAction: PaginatingAndSortingProps) => void;
     dataTable: DataTableProps;
-    style?:CSSProperties;
+    style?: CSSProperties;
 }
 
 export interface TableContextProps {
     handeChangePaginatingAndSorting: (page: PaginatingAndSortingProps) => void
     pageAction: PaginatingAndSortingProps;
-    dataTable?:DataTableProps;
+    dataTable: DataTableProps;
 }
 
 export interface PaginatingAndSortingProps {
@@ -25,19 +25,19 @@ export interface PaginatingAndSortingProps {
 
 export interface PaginationComponentProps {
     className?: string;
-    style?:CSSProperties;
-    paginationData:PaginationDataProps;
+    style?: CSSProperties;
+    paginationData: PaginationDataProps;
 }
 
-export interface PaginationDataProps{
-    maxItemsShow?:number;
-    number:number;
-    showLastedAndFirst?:boolean;
-    totalPages:number;
+export interface PaginationDataProps {
+    maxItemsShow?: number;
+    number: number;
+    showLastedAndFirst?: boolean;
+    totalPages: number;
 }
 
 export interface DataTableProps {
-    content?: Array<{[key:string]:any}>;
+    content?: Array<{ [key: string]: any }>;
     maxItemsShow?: number;
     number: number;
     showLastedAndFirst?: boolean;

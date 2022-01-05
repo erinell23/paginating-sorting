@@ -9,6 +9,7 @@ import styles from '../styles/styles.module.css';
 export const TableContext = createContext({} as TableContextProps);
 const { Provider } = TableContext;
 
+
 export const Table = ({ dataTable, children, onChange, className, classTable, classPagination, style }: TableProps) => {
     const [pageAction, setPageAction] = useState({
         page: dataTable.number || 0,
@@ -34,11 +35,10 @@ export const Table = ({ dataTable, children, onChange, className, classTable, cl
                             ? children
                             : (
                                 <>
-                                    {_dataTable.titles ? <THead titles={_dataTable.titles} /> : <></>}
-                                    {_dataTable.content ? <TBody content={_dataTable.content} titles={_dataTable.titles} /> : <></>}
+                                    {_dataTable.titles ? <THead /> : <></>}
+                                    {_dataTable.content ? <TBody /> : <></>}
                                 </>
                             )
-
                     }
                 </table>
                 {
@@ -52,13 +52,13 @@ export const Table = ({ dataTable, children, onChange, className, classTable, cl
 
 
 Table.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.elementType, PropTypes.arrayOf(PropTypes.elementType)]),
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
     className: PropTypes.string,
     classPagination: PropTypes.string,
     classTable: PropTypes.string,
     onChange: PropTypes.func,
     dataTable: PropTypes.shape({
-        content: PropTypes.arrayOf(PropTypes.object).isRequired,
+        content: PropTypes.arrayOf(PropTypes.object),
         maxItemsShow: PropTypes.number,
         number: PropTypes.number.isRequired,
         showLastedAndFirst: PropTypes.bool,
@@ -67,7 +67,7 @@ Table.propTypes = {
             sort: PropTypes.string,
             name: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
             title: PropTypes.string.isRequired,
-        })).isRequired,
+        })),
         totalElements: PropTypes.number,
         totalPages: PropTypes.number.isRequired
     }),
