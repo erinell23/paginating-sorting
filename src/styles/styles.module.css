@@ -9,6 +9,10 @@
     border-top-left-radius: .25rem;
     border-bottom-left-radius: .25rem;
 }
+.pg_item:last-child .pg_link {
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
 
 .pg_link {
     padding: .375rem .75rem;

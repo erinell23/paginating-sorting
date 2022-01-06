@@ -22,7 +22,7 @@ export const usePaginator = ({
 
     const handleChangePage = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, i: number) => {
         e.preventDefault();
-        const page = i <= 0 ? 0 : (i >= totalPages ? totalPages : i);
+        const page = i <= 0 ? 0 : (i >= totalPages ? totalPages - 1 : i);
         handeChangePaginatingAndSorting({ ...pageAction, page });
     }
     useEffect(() => {

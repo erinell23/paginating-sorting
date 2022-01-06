@@ -24,11 +24,11 @@ export const Pagination = ({ paginationData, className, style }: PaginationCompo
                         onClick={(e) => handleChangePage(e, 0)}
                     >1...</a>
                 </li>}
-            {showLastedAndFirst && items > 1
+            {showLastedAndFirst && items > 1 && number >= items
                 && <li className={styles.pg_item}>
                     <a className={styles.pg_link} href='/#' onClick={(e) => handleChangePage(e, number - items)}>{'«'}</a>
                 </li>}
-            {totalPages > 1
+            {number > 0
                 && <li className={styles.pg_item}>
                     <a className={styles.pg_link} href='/#' onClick={(e) => handleChangePage(e, number - 1)}>{'<'}</a>
                 </li>}
@@ -48,12 +48,12 @@ export const Pagination = ({ paginationData, className, style }: PaginationCompo
                 )}
 
 
-            {totalPages > 1
+            {number < totalPages -1 
                 && <li className={styles.pg_item}>
                     <a className={styles.pg_link} href='/#' onClick={(e) => handleChangePage(e, number + 1)}>{'>'}</a>
                 </li>}
-            {showLastedAndFirst && items > 1 &&
-                <li className={styles.pg_item}>
+            {showLastedAndFirst && items > 1 && number < totalPages - items
+                && <li className={styles.pg_item}>
                     <a className={styles.pg_link} href='/#' onClick={(e) => handleChangePage(e, number + items)}>{'»'}</a>
                 </li>}
             {sumar + items < totalPages
