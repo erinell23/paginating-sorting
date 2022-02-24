@@ -52,6 +52,6 @@ THead.propTypes = {
     titles: PropTypes.arrayOf(PropTypes.shape({
         sort: PropTypes.string,
         name: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-        title: PropTypes.string.isRequired,
+        title: PropTypes.any.isRequired,
     })),
 }
