@@ -54,7 +54,7 @@
 | ----- | ------------------------- | ----------------------------------- | ------------------------------- |
 | sort  | `string`                  | Not                                  | Base text string to return when sorting a column, if not sent, the options in that column are hidden.   |
 | name  | `string` or `Array`<`string`> | Yes, if you don't send  `sort` | Key to locate the value to show in the column. If it's a nested value, the keys are separated by a period. If you want to concatenate values in a column, the keys are sent in an array. |
-| title | `string`                    | Yes                                 | Title to show Columns in the table.     |
+| title | `any`                    | Yes                                 | Title to show Columns in the table.     |
 
 <br/><br/>
 

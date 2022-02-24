@@ -50,7 +50,7 @@ export interface DataTableProps {
 export interface TitleTableProps {
     sort?: string;
     name?: string | Array<string>;
-    title: string;
+    title: any;
 }
 
 
